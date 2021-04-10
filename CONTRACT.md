@@ -10,6 +10,6 @@
 2. **Time Commitment** In order to maintain the pace of the project, each member is expected to work two to six hours per week under normal conditions. If an issue arises or if a task ends up taking a significantly larger amount of time than expected, they will communicate with the rest of the team and state what problems they are facing, and work will be re-budgeted to split the load if needed. In order to meet project deadlines, more work may be occasionally needed but will be split across team members.
 3. **Conflict Resolution** 3 people conflicts within this group will be resolved by a simple vote, where the majority prevails. In case of 2 people conflicts, the 3rd person will serve as a tie-breaking vote.
 
-# Signatures
+## Signatures
 tslietz2 - Thailer Lietz
-sohamk2 - Soham Kulkarni
+ttz2     - Timothy Zhou
