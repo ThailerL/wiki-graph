@@ -5,13 +5,13 @@ TEST = test
 
 # Add all object files needed for compiling:
 EXE_OBJ = main.o
-OBJS = main.o prep-data.o
+OBJS = main.o
 
 # Generated files
 CLEAN_RM = actual-*.png
 
 # Use the cs225 makefile template:
-include cs225/make/cs225.mk
+include src/cs225/make/cs225.mk
 
 # Data trim target
 DSETS_OBJS = prep-data.o
