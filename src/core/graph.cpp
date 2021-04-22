@@ -6,6 +6,7 @@
 
 using std::stringstream;
 using std::getline;
+using std::ifstream;
 using namespace wikigraph::util;
 
 namespace wikigraph {

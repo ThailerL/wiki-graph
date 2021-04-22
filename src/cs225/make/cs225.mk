@@ -15,7 +15,7 @@ LD = clang++
 OBJS_DIR = .objs
 
 # Add standard CS 225 object files
-OBJS += cs225/HSLAPixel.o cs225/PNG.o cs225/lodepng/lodepng.o
+OBJS += src/cs225/HSLAPixel.o src/cs225/PNG.o src/cs225/lodepng/lodepng.o
 
 # -MMD and -MP asks clang++ to generate a .d file listing the headers used in the source code for use in the Make process.
 #   -MMD: "Write a depfile containing user headers"
@@ -39,7 +39,7 @@ all: $(EXE)
 # - $(EXE) depends on all object files in $(OBJS)
 # - `patsubst` function adds the directory name $(OBJS_DIR) before every object file
 $(EXE): output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS))
-	$(LD) $(filter-out $<, $^) $(LDFLAGS) -o $@
+	$(LD) $(filter-out $<, $^) -L/usr/local/boost_1_61_0/boost -lboost_algorithm $(LDFLAGS) -o $@
 
 # Ensure .objs/ exists:
 $(OBJS_DIR):
@@ -49,13 +49,15 @@ $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)/src/cs225/lodepng
 	@mkdir -p $(OBJS_DIR)/tests
 # mp_traversal specific
-	@mkdir -p $(OBJS_DIR)/imageTraversal
-	@mkdir -p $(OBJS_DIR)/colorPicker
-# mp_mosaic specific
-	@mkdir -p $(OBJS_DIR)/src/cs225/ColorSpace
-	@mkdir -p $(OBJS_DIR)/util
+# 	@mkdir -p $(OBJS_DIR)/imageTraversal
+# 	@mkdir -p $(OBJS_DIR)/colorPicker
+# # mp_mosaic specific
+# 	@mkdir -p $(OBJS_DIR)/src/cs225/ColorSpace
+# 	@mkdir -p $(OBJS_DIR)/util
+
 # final project specific
-	@mkdir -p $(OBJS_DIR)/src
+	@mkdir -p $(OBJS_DIR)/src/core
+	@mkdir -p $(OBJS_DIR)/src/util
 	@mkdir -p $(OBJS_DIR)/apps	
 
 # Rules for compiling source code.
@@ -70,7 +72,7 @@ $(OBJS_DIR)/%.o: %.cpp | $(OBJS_DIR)
 # - Build the test program w/ catchmain.cpp from cs225
 OBJS_TEST += $(filter-out $(EXE_OBJ), $(OBJS))
 CPP_TEST = $(wildcard tests/*.cpp)
-CPP_TEST += cs225/catch/catchmain.cpp
+CPP_TEST += src/cs225/catch/catchmain.cpp
 OBJS_TEST += $(CPP_TEST:.cpp=.o)
 
 $(TEST): output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_TEST))
@@ -81,6 +83,8 @@ $(TEST): output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_TEST))
 -include $(OBJS_DIR)/*.d
 -include $(OBJS_DIR)/src/cs225/*.d
 -include $(OBJS_DIR)/src/*.d
+-include $(OBJS_DIR)/src/core/*.d
+-include $(OBJS_DIR)/src/util/*.d
 -include $(OBJS_DIR)/apps/*.d
 -include $(OBJS_DIR)/src/cs225/catch/*.d
 -include $(OBJS_DIR)/src/cs225/lodepng/*.d
