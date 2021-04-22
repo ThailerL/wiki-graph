@@ -1,5 +1,8 @@
 #include "util.h"
 
+namespace wikigraph {
+namespace util {
+
 void log(std::string s, bool colored) {
     if (colored)
         std::cout << "\x1B[32m" << s << "\033[0m\t\t\n";
@@ -16,4 +19,7 @@ bool file_exists(const char *fileName) {
 
 bool isValid(int lower, int upper, int value) {
     return value >= lower && value <= upper;
+}
+
+}
 }

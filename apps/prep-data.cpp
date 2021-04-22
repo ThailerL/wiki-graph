@@ -5,7 +5,7 @@
 
 using std::string;
 using std::stringstream;
-using namespace wikigraph;
+using namespace wikigraph::util;
 
 int main(int argc, char *argv[]) {
     log(string("[!] Preparing test data [!]"), true);
