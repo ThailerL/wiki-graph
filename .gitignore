@@ -4,3 +4,5 @@ wikidata.txt
 *.idea
 *.clang-format
 test
+*.objs
+*.vscode
