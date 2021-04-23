@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <fstream>
 #include "graph.h"
 #include <boost/algorithm/string.hpp>
 #include "../util/util.h"
@@ -15,8 +16,8 @@ namespace core {
 Graph::Graph(size_t lowerIndex, size_t higherIndex, const string &filename)
     : _lowerIndex(lowerIndex), _higherIndex(higherIndex) {
     // initialize with empty nodes
-    for (size_t i = lowerIndex; i < higherIndex; i++)
-        nodes.push_back(Node(i));
+    for (size_t i = lowerIndex; i <= higherIndex; i++)
+        nodes.emplace_back(i);
 
     // validate file
     if (!file_exists(filename))
@@ -28,7 +29,7 @@ Graph::Graph(size_t lowerIndex, size_t higherIndex, const string &filename)
     while (getline(ifs, line)) {
         // split line
         vector<string> split;
-        boost::split(split, line, " ");
+        boost::split(split, line, boost::is_any_of(" "));
         size_t from = stoi(split[0]);
         size_t to = stoi(split[1]);
 

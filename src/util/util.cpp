@@ -1,5 +1,8 @@
 #include "util.h"
 
+#include <iostream>
+#include <fstream>
+
 namespace wikigraph {
 namespace util {
 
@@ -12,7 +15,7 @@ void log(std::string s, bool colored) {
 
 void err(std::string s) { std::cout << "\x1B[31m" << s << "\033[0m\t\t\n"; }
 
-bool file_exists(const char *fileName) {
+bool file_exists(const std::string& fileName) {
     std::ifstream infile(fileName);
     return infile.good();
 }

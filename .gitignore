@@ -3,3 +3,4 @@ wikidata.txt
 *.o
 *.idea
 *.clang-format
+test
