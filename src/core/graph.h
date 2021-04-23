@@ -17,7 +17,7 @@ public:
     struct Node {
         Node(size_t index) : index(index) {}
         size_t index;
-        vector<Node *> neighbors;
+        vector<size_t> neighbors;
     };
     /**
      * Constructor for a Graph object.

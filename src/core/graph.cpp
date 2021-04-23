@@ -42,7 +42,7 @@ void Graph::addEdge(size_t from, size_t to) {
         throw std::invalid_argument("Received node index out of range");
     from -= _lowerIndex;
     to -= _lowerIndex;
-    nodes[from].neighbors.push_back(&nodes[to]);
+    nodes[from].neighbors.push_back(to);
 }
 
 }
