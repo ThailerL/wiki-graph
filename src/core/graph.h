@@ -26,7 +26,7 @@ public:
      * @param higherIndex the highest node index
      * @param filename path to output of prep-data
     */
-    Graph(size_t lowerIndex, size_t higherIndex, const string &filename);
+    Graph(const string &filename);
 
     vector<Node> nodes;
 private:

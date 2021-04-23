@@ -13,17 +13,24 @@ using namespace wikigraph::util;
 namespace wikigraph {
 namespace core {
 
-Graph::Graph(size_t lowerIndex, size_t higherIndex, const string &filename)
-    : _lowerIndex(lowerIndex), _higherIndex(higherIndex) {
-    // initialize with empty nodes
-    for (size_t i = lowerIndex; i <= higherIndex; i++)
-        nodes.emplace_back(i);
-
+Graph::Graph(const string &filename) {
     // validate file
     if (!file_exists(filename))
         throw std::invalid_argument("File " + filename + " does not exist");
+
     ifstream ifs(filename);
     string line;
+
+    getline(ifs, line);
+    vector<string> split;
+    boost::split(split, line, boost::is_any_of(" "));
+    _lowerIndex = stoi(split[0]);
+    _higherIndex = stoi(split[1]);
+
+    
+    // initialize with empty nodes
+    for (size_t i = _lowerIndex; i <= _higherIndex; i++)
+        nodes.emplace_back(i);
 
     // iterate over file
     while (getline(ifs, line)) {

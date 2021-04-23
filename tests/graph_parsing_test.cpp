@@ -14,7 +14,7 @@ TEST_CASE("Graph loaded in correctly") {
     expected[2].neighbors = {0};
     expected[3].neighbors = {2};
 
-    Graph graph(1, 4, test_file);
+    Graph graph(test_file);
 
     REQUIRE(graph.nodes.size() == expected.size());
 
@@ -26,9 +26,5 @@ TEST_CASE("Graph loaded in correctly") {
 
 TEST_CASE("No file found throws exception") {
     std::string file_name = "does_not_exist.txt";
-    REQUIRE_THROWS_WITH(Graph(1, 4, file_name), "File " + file_name + " does not exist");
-}
-
-TEST_CASE("Index out of range throws expection") {
-    REQUIRE_THROWS_WITH(Graph(0, 3, test_file), "Received node index out of range");
+    REQUIRE_THROWS_WITH(Graph(file_name), "File " + file_name + " does not exist");
 }

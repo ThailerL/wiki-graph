@@ -41,6 +41,9 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     log(string("[!] Located files :D"), true);
+
+    outputFile << lower << ' ' << upper << std::endl;
+
     // Read lines
     int dataCounter = 0, finalCounter = 0;
     string line;
