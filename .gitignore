@@ -1,4 +1,5 @@
 wikidata.txt
+*.d
 *.o
 *.idea
 *.clang-format
