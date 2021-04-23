@@ -28,7 +28,7 @@ public:
     */
     Graph(size_t lowerIndex, size_t higherIndex, const string &filename);
 
-    vector<Node *> nodes;
+    vector<Node> nodes;
 private:
     /**
      * Helper method to insert edge into the graph.

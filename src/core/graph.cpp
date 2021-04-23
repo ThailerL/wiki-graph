@@ -16,7 +16,7 @@ Graph::Graph(size_t lowerIndex, size_t higherIndex, const string &filename)
     : _lowerIndex(lowerIndex), _higherIndex(higherIndex) {
     // initialize with empty nodes
     for (size_t i = lowerIndex; i < higherIndex; i++)
-        nodes.push_back(new Node(i));
+        nodes.push_back(Node(i));
 
     // validate file
     if (!file_exists(filename))
@@ -42,7 +42,7 @@ void Graph::addEdge(size_t from, size_t to) {
         throw std::invalid_argument("Received node index out of range");
     from -= _lowerIndex;
     to -= _lowerIndex;
-    nodes[from]->neighbors.push_back(nodes[to]);
+    nodes[from].neighbors.push_back(&nodes[to]);
 }
 
 }
