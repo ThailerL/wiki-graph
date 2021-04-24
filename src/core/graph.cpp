@@ -53,5 +53,9 @@ void Graph::addEdge(size_t from, size_t to) {
     nodes[from].neighbors.push_back(to);
 }
 
+vector<size_t> Graph::shortestPath(size_t from, size_t to) {
+    return vector<size_t>();
+}
+
 }
 }

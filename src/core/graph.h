@@ -27,6 +27,15 @@ public:
      * @param filename path to output of prep-data
     */
     Graph(const string &filename);
+    
+    /**
+     * Finds the shortest path from one node to another with Dijkstra's algorithm.
+     *
+     * @param from the starting node index
+     * @param to the ending node index
+     * @return a vector of node indices of nodes that make up the shortest path in order (empty if no path)
+    */
+    vector<size_t> shortestPath(size_t from, size_t to);
 
     vector<Node> nodes;
 private:
