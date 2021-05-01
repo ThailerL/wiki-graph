@@ -29,7 +29,7 @@ public:
     Graph(const string &filename);
     
     /**
-     * Finds the shortest path from one node to another with Dijkstra's algorithm.
+     * Finds the shortest path from one node to another with breadth first search.
      *
      * @param from the starting node index
      * @param to the ending node index

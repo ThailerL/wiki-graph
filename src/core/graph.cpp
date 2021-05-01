@@ -1,6 +1,8 @@
 #include <iostream>
 #include <algorithm>
 #include <fstream>
+#include <unordered_map>
+#include <queue>
 #include "graph.h"
 #include <boost/algorithm/string.hpp>
 #include "../util/util.h"
@@ -54,6 +56,38 @@ void Graph::addEdge(size_t from, size_t to) {
 }
 
 vector<size_t> Graph::shortestPath(size_t from, size_t to) {
+    from = from - _lowerIndex;
+    to = to - _lowerIndex;
+    std::unordered_map<size_t, size_t> predecessors;
+    std::queue<size_t> work;
+
+    predecessors[from] = from;
+    work.push(from);
+    
+    while (!work.empty()) {
+        size_t idx = work.front();
+        work.pop();
+
+        if (idx == to) {
+            vector<size_t> path = {idx};
+            while (path.back() != from) {
+                path.push_back(predecessors[path.back()]);
+            }
+            std::reverse(path.begin(), path.end());
+            for (size_t& node : path) {
+                node += _lowerIndex;
+            }
+            return path;
+        }
+
+        for (size_t newIdx : nodes[idx].neighbors) {
+            bool isNew = predecessors.insert({newIdx, idx}).second;
+            if (isNew) {
+                work.push(newIdx);
+            }
+        }
+    }
+
     return vector<size_t>();
 }
 

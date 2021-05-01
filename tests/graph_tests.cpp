@@ -6,7 +6,7 @@
 
 using namespace wikigraph::core;
 
-const std::string test_file =  "/home/tslietz2/tslietz2-sohamk2-ttz2/tests/wikidata_example.txt";
+const std::string test_file =  "/home/tslietz2/tslietz2-sohamk2-ttz2/tests/simple_graph.txt";
 
 TEST_CASE("Simple constructor tests") {
     SECTION("Graph loaded in correctly") {
