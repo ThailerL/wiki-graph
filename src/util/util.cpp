@@ -24,5 +24,14 @@ bool isValid(int lower, int upper, int value) {
     return value >= lower && value <= upper;
 }
 
+// Adopted from https://stackoverflow.com/a/20016865/11129331
+RNG::RNG(double low, double high)
+    : r(std::bind(std::uniform_real_distribution<>(low, high),
+                  std::default_random_engine(std::chrono::system_clock::now().time_since_epoch().count()))) {}
+
+double RNG::operator()() {
+    return r();
+}
+
 }
 }
