@@ -5,7 +5,7 @@ TEST = test
 
 # Add all object files needed for compiling:
 EXE_OBJ = apps/main.o
-OBJS = apps/main.o src/core/graph.o src/util/util.o
+OBJS = apps/main.o src/core/graph.o src/util/util.o src/core/particle.o src/core/force.o src/core/simulation.o
 
 # Generated files
 CLEAN_RM = actual-*.png

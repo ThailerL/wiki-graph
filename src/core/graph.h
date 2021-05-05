@@ -26,8 +26,8 @@ public:
      * @param higherIndex the highest node index
      * @param filename path to output of prep-data
     */
-    Graph(const string &filename);
-    
+    Graph(const string& filename);
+
     /**
      * Finds the shortest path from one node to another with breadth first search.
      *

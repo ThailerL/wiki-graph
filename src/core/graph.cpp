@@ -15,7 +15,7 @@ using namespace wikigraph::util;
 namespace wikigraph {
 namespace core {
 
-Graph::Graph(const string &filename) {
+Graph::Graph(const string& filename) {
     // validate file
     if (!file_exists(filename))
         throw std::invalid_argument("File " + filename + " does not exist");
@@ -29,7 +29,7 @@ Graph::Graph(const string &filename) {
     _lowerIndex = stoi(split[0]);
     _higherIndex = stoi(split[1]);
 
-    
+
     // initialize with empty nodes
     for (size_t i = _lowerIndex; i <= _higherIndex; i++)
         nodes.emplace_back(i);
@@ -63,7 +63,7 @@ vector<size_t> Graph::shortestPath(size_t from, size_t to) {
 
     predecessors[from] = from;
     work.push(from);
-    
+
     while (!work.empty()) {
         size_t idx = work.front();
         work.pop();
