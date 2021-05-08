@@ -39,8 +39,8 @@ all: $(EXE)
 # - $(EXE) depends on all object files in $(OBJS)
 # - `patsubst` function adds the directory name $(OBJS_DIR) before every object file
 $(EXE): output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS))
-	$(LD) $(filter-out $<, $^) -L/usr/local/boost_1_61_0/boost $(LDFLAGS) -o $@
-
+	$(LD) $(filter-out $<, $^) $(LDFLAGS) -o $@
+# -L/usr/local/boost_1_61_0/boost
 # Ensure .objs/ exists:
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
