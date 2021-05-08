@@ -29,6 +29,20 @@ TEST_CASE("Simple constructor tests") {
         std::string file_name = "does_not_exist.txt";
         REQUIRE_THROWS_WITH(Graph(file_name), "File " + file_name + " does not exist");
     }
+
+    SECTION("Indegrees are accurate") {
+        Graph graph(test_file);
+        std::vector<Graph::Node> expected = {1, 2, 3, 4};
+        expected[0].indegree = 1;
+        expected[1].indegree = 0;        
+        expected[2].indegree = 2;
+        expected[3].indegree = 1;
+
+        for (size_t i = 0; i < graph.nodes.size(); ++i) {
+            REQUIRE(graph.nodes[i].index == expected[i].index);
+            REQUIRE(graph.nodes[i].indegree == expected[i].indegree);
+        }   
+    }
 }
 
 TEST_CASE("Simple shortestPath tests") {
@@ -46,3 +60,4 @@ TEST_CASE("Simple shortestPath tests") {
         REQUIRE(graph.shortestPath(1, 1) == vector<size_t>{1});
     }
 }
+

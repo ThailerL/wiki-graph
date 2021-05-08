@@ -17,6 +17,7 @@ public:
     struct Node {
         Node(size_t index) : index(index) {}
         size_t index;
+        size_t indegree = 0;
         vector<size_t> neighbors;
     };
     /**
