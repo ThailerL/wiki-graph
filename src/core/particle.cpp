@@ -1,3 +1,5 @@
+#include <boost/algorithm/clamp.hpp>
+
 #include "particle.h"
 
 namespace wikigraph {
@@ -16,6 +18,11 @@ void Particle::update(double dt) {
     velocity += acceleration * dt;
     position += velocity * dt;
     acceleration = {0, 0};
+}
+
+void Particle::clamp(double maxX, double maxY) {
+    boost::algorithm::clamp(position.x, -maxX, maxX);
+    boost::algorithm::clamp(position.y, -maxY, maxY);
 }
 
 double distance(const Particle& p1, const Particle& p2) {

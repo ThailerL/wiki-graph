@@ -47,6 +47,7 @@ void Simulation::update(double dt) {
     }
     for (Particle& p : _particles) {
         p.update(dt);
+        p.clamp(_maxX, _maxY);
     }
 }
 

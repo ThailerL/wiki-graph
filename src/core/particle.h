@@ -36,6 +36,13 @@ public:
      * @param dt the timestep
      */
     void update(double dt);
+    /**
+     * Clamps the position of the particle.
+     *
+     * @parama maxX max x-value for the particle
+     * @param maxY max y-value for the particle
+     */
+     void clamp(double maxX, double maxY);
 };
 
 /**
