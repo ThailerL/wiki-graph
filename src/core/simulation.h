@@ -44,6 +44,11 @@ public:
      */
     void run(size_t iterations, double dt);
 
+    /**
+     * Gets (position, mass) pairs for all particles in the simulation.
+     */
+    vector<pair<dvec2, double>> getParticleInfo() const;
+
 private:
     vector<Particle> _particles;
     map<pair<size_t, size_t>, Force> _forces;

@@ -51,5 +51,13 @@ void Simulation::update(double dt) {
     }
 }
 
+vector<pair<dvec2, double>> Simulation::getParticleInfo() const {
+    vector<pair<dvec2, double>> particleInfo(_particles.size());
+    for (const Particle& particle : _particles) {
+        particleInfo.emplace_back(particle.position, particle.mass);
+    }
+    return particleInfo;
+}
+
 }
 }
