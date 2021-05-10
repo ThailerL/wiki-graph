@@ -23,9 +23,9 @@ public:
     /**
      * Constructs a simulation from a vector of particles.
      *
-     * @param particles vector of Particle objects.
+     * @param masses vector of masses
      */
-    Simulation(const vector<Particle>& particles, double width, double height);
+    Simulation(const vector<double>& masses, double width, double height);
 
     /**
      * Adds a force between two particles.

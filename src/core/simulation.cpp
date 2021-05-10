@@ -6,8 +6,9 @@ using wikigraph::util::RNG;
 namespace wikigraph {
 namespace core {
 
-Simulation::Simulation(const vector<Particle>& particles, double width, double height)
-    : _particles(particles), _maxX(width / 2), _maxY(height / 2) {
+Simulation::Simulation(const vector<double>& masses, double width, double height)
+    : _maxX(width / 2), _maxY(height / 2) {
+    for (double mass : masses) _particles.emplace_back(mass);
 }
 
 void Simulation::addForceBetween(size_t p1, size_t p2, const Force& force) {

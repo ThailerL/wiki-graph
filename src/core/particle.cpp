@@ -6,6 +6,8 @@ namespace core {
 Particle::Particle(const dvec2& position, const dvec2& velocity, const dvec2& acceleration, double mass) : position(
     position), velocity(velocity), acceleration(acceleration), mass(mass) {}
 
+Particle::Particle(double mass) : position(), velocity(), acceleration(), mass(mass) {}
+
 void Particle::addForce(const dvec2& forceVector) {
     acceleration += forceVector / mass;
 }

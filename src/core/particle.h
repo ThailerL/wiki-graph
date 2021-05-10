@@ -23,6 +23,7 @@ public:
     dvec2 acceleration;
     const double mass;
     Particle(const dvec2& position, const dvec2& velocity, const dvec2& acceleration, double mass);
+    Particle(double mass);
     /**
      * Adds a force to the particle for the current timestep (not persistent).
      *
