@@ -7,7 +7,7 @@ using std::string;
 using std::stringstream;
 using namespace wikigraph::util;
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     log(string("[!] Preparing test data [!]"), true);
 
     // Number of Expected arguments

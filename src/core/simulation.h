@@ -54,6 +54,7 @@ private:
     map<pair<size_t, size_t>, Force> _forces;
     const double _maxX;
     const double _maxY;
+
     /**
      * Updates simulation by a single timestep.
      *

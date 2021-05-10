@@ -23,26 +23,28 @@ public:
     dvec2 acceleration;
     const double mass;
     Particle(const dvec2& position, const dvec2& velocity, const dvec2& acceleration, double mass);
-    Particle(double mass);
+    explicit Particle(double mass);
     /**
      * Adds a force to the particle for the current timestep (not persistent).
      *
      * @param forceVector vector representing the force
      */
     void addForce(const dvec2& forceVector);
+
     /**
      * Updates the position and velocity of the particle, resets the acceleration.
      *
      * @param dt the timestep
      */
     void update(double dt);
+
     /**
      * Clamps the position of the particle.
      *
      * @parama maxX max x-value for the particle
      * @param maxY max y-value for the particle
      */
-     void clamp(double maxX, double maxY);
+    void clamp(double maxX, double maxY);
 };
 
 /**

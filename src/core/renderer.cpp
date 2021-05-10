@@ -9,7 +9,7 @@ namespace core {
  * @return ordered vector of doubles
  */
 vector<double> getMassVector(const Graph& graph) {
-    vector<double> masses;
+    vector<double> masses(graph.nodes.size());
     for (const Graph::Node& node : graph.nodes) {
         masses.push_back(node.indegree);
     }

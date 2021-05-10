@@ -37,6 +37,7 @@ public:
     };
 
     Renderer(const Graph& graph, const RendererConfig& cfg);
+
     /**
      * Renders the graph.
      * @return a PNG object with the drawn graph.

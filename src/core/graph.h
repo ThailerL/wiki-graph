@@ -20,6 +20,7 @@ public:
         size_t indegree = 0;
         vector<size_t> neighbors;
     };
+
     /**
      * Constructor for a Graph object.
      *
