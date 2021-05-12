@@ -14,7 +14,8 @@ CLEAN_RM = actual-*.png
 include src/cs225/make/cs225.mk
 
 # Data trim target
-DSETS_OBJS = apps/prep-data.o
+OBJS_TRIM += $(filter-out $(EXE_OBJ), $(OBJS))
+OBJS_TRIM += apps/prep-data.o
 
-prep-data: $(DSETS_OBJS)
-	$(LD) $^ $(LDFLAGS) -o $@
+prep-data: output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_TRIM)) $(LIBS)
+	$(LD) $(filter-out $<, $^) $(LDFLAGS) -o $@

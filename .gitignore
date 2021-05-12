@@ -1,9 +1,15 @@
-wikidata.txt
 *.d
 *.o
 *.idea
 *.clang-format
-test
 *.objs
 *.vscode
+
+# data
+wikidata.txt
+data/
+
+# executables
 wiki-graph
+test
+prep-data
