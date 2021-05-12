@@ -61,3 +61,24 @@ TEST_CASE("Simple shortestPath tests") {
     }
 }
 
+TEST_CASE("Djikstra shortestPath tests") {
+    Graph graph(test_file);
+
+    // SECTION("Shortest path found when a longer path exists") {
+    //     REQUIRE(graph.getDjikstraPath(1, 3) == vector<size_t>{1, 3});
+    // }
+
+    // SECTION("Returns empty vector when no path exists") {
+    //     REQUIRE(graph.getDjikstraPath(1, 2) == vector<size_t>{});
+    // }
+
+    // SECTION("Shortest path from a node to itself is itself") {
+    //     REQUIRE(graph.getDjikstraPath(1, 1) == vector<size_t>{1});
+    // }
+
+    graph = Graph("./tests/djikstra_graph.txt");
+
+    SECTION("Shortest path avoids node with high indegree") {
+        REQUIRE(graph.getDjikstraPath(5, 3) == vector<size_t>{5, 2, 3});
+    }
+}
