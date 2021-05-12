@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
             std::cerr << "From node " << argv[3] << " is out of range\n";
             return 1;
         }
-        if (to < graph.getLowerIndex() || from >= graph.getLowerIndex() + graph.nodes.size()) {
+        if (to < graph.getLowerIndex() || to >= graph.getLowerIndex() + graph.nodes.size()) {
             std::cerr << "To node " << argv[4] << " is out of range\n";
             return 1;
         }
