@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
     cfg.simulationHeight = cfg.simulationWidth;
     cfg.nodeRepulsion = .5;
     cfg.neighborAttraction = 1;
+    cfg.maxRepulsionRadius = 10;
     cfg.iterations = cfg.simulationWidth;
     cfg.dt = 0.01;
     vector<size_t> path;
