@@ -58,5 +58,5 @@ Description
     ```
     ./wiki-graph data/math.txt graph.png 507232 506726
     ```
-    This outputs an image that looks like this: [ex](example.png)
+    This outputs an image that looks like this: ![math path](example.png)
 
