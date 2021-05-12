@@ -1,11 +1,11 @@
 #pragma once
 
-#include <vector>
-#include <string>
 #include <Qt/qvector2d.h>
+#include <string>
+#include <vector>
 
-using std::vector;
 using std::string;
+using std::vector;
 
 namespace wikigraph {
 namespace core {
@@ -59,5 +59,5 @@ double distance2(const Particle& p1, const Particle& p2);
  */
 QVector2D towards(const Particle& p1, const Particle& p2);
 
-}
-}
+} // namespace core
+} // namespace wikigraph

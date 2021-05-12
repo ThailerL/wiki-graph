@@ -77,5 +77,5 @@ void Renderer::drawCircle(PNG& image, size_t x, size_t y, size_t radius, const H
     }
 }
 
-}
-}
+} // namespace core
+} // namespace wikigraph

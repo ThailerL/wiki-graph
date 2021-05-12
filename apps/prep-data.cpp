@@ -1,7 +1,7 @@
+#include "../src/util/util.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include "../src/util/util.h"
 
 using std::string;
 using std::stringstream;

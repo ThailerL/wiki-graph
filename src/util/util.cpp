@@ -1,7 +1,7 @@
 #include "util.h"
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 
 namespace wikigraph {
 namespace util {
@@ -33,5 +33,5 @@ double RNG::operator()() {
     return r();
 }
 
-}
-}
+} // namespace util
+} // namespace wikigraph

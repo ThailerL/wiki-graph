@@ -1,12 +1,12 @@
 #pragma once
 
-#include <vector>
-#include <string>
-#include <functional>
 #include "particle.h"
+#include <functional>
+#include <string>
+#include <vector>
 
-using std::vector;
 using std::function;
+using std::vector;
 
 namespace wikigraph {
 namespace core {
@@ -38,5 +38,5 @@ Force operator+(const Force& f1, const Force& f2);
 
 Force& operator+=(Force& lhs, const Force& rhs);
 
-}
-}
+} // namespace core
+} // namespace wikigraph

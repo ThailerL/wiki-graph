@@ -24,5 +24,5 @@ private:
     std::function<double()> r;
 };
 
-}
-}
+} // namespace util
+} // namespace wikigraph

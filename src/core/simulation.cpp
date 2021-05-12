@@ -8,13 +8,16 @@ namespace core {
 
 Simulation::Simulation(const vector<double>& masses, double width, double height)
     : _maxX(width / 2), _maxY(height / 2) {
-    for (double mass : masses) _particles.emplace_back(mass);
+    for (double mass : masses)
+        _particles.emplace_back(mass);
 }
 
 void Simulation::addForceBetween(size_t p1, size_t p2, const Force& force) {
     pair<size_t, size_t> particles = {p1, p2};
-    if (_forces.count(particles)) _forces[particles] += force;
-    else _forces[particles] = force;
+    if (_forces.count(particles))
+        _forces[particles] += force;
+    else
+        _forces[particles] = force;
 }
 
 void Simulation::run(size_t iterations, double dt) {
@@ -59,5 +62,5 @@ vector<pair<QVector2D, double>> Simulation::getParticleInfo() const {
     return particleInfo;
 }
 
-}
-}
+} // namespace core
+} // namespace wikigraph

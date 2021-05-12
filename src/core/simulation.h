@@ -1,15 +1,15 @@
 #pragma once
 
-#include "particle.h"
 #include "force.h"
-#include <vector>
-#include <map>
+#include "particle.h"
 #include <functional>
+#include <map>
+#include <vector>
 
-using std::vector;
+using std::function;
 using std::map;
 using std::pair;
-using std::function;
+using std::vector;
 
 namespace wikigraph {
 namespace core {
@@ -62,5 +62,5 @@ private:
     void update(double dt);
 };
 
-}
-}
+} // namespace core
+} // namespace wikigraph

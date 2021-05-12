@@ -1,15 +1,14 @@
 #pragma once
 
-#include <vector>
-
+#include "../cs225/HSLAPixel.h"
+#include "../cs225/PNG.h"
+#include "force.h"
 #include "graph.h"
 #include "simulation.h"
-#include "force.h"
-#include "../cs225/PNG.h"
-#include "../cs225/HSLAPixel.h"
+#include <vector>
 
-using cs225::PNG;
 using cs225::HSLAPixel;
+using cs225::PNG;
 
 namespace wikigraph {
 namespace core {
@@ -53,5 +52,5 @@ private:
     void drawCircle(PNG& image, size_t x, size_t y, size_t radius, const HSLAPixel& color);
 };
 
-}
-}
+} // namespace core
+} // namespace wikigraph

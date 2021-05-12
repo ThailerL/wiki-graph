@@ -1,10 +1,10 @@
 #pragma once
 
-#include <vector>
 #include <string>
+#include <vector>
 
-using std::vector;
 using std::string;
+using std::vector;
 
 namespace wikigraph {
 namespace core {
@@ -41,6 +41,7 @@ public:
     vector<size_t> getDjikstraPath(size_t from, size_t to);
 
     vector<Node> nodes;
+
 private:
     /**
      * Helper method to insert edge into the graph.
@@ -52,5 +53,5 @@ private:
     size_t _higherIndex;
 };
 
-}
-}
+} // namespace core
+} // namespace wikigraph
