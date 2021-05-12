@@ -9,12 +9,12 @@ int main(int argc, char* argv[]) {
     Graph graph(argv[1]);
     cout << "Created graph\n";
     Renderer::RendererConfig cfg;
-    cfg.simulationWidth = 10000;
-    cfg.simulationHeight = 10000;
+    cfg.simulationWidth = 2000;
+    cfg.simulationHeight = 2000;
     cfg.nodeRepulsion = 1;
     cfg.neighborAttraction = 1;
     cfg.iterations = 1000;
-    cfg.dt = 1;
+    cfg.dt = 0.01;
 
     Renderer renderer(graph, cfg);
     cout << "Created renderer\n";

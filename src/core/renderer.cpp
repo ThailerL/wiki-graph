@@ -39,14 +39,14 @@ PNG Renderer::render(size_t imageWidth, size_t imageHeight) {
     PNG image(imageWidth, imageHeight);
     HSLAPixel color(0, 1, .5, 1);
 
-    double xScale = 0.8 * imageWidth / _cfg.simulationWidth;
-    double yScale = 0.8 * imageHeight / _cfg.simulationHeight;
+    double xScale = 0.9 * imageWidth / _cfg.simulationWidth;
+    double yScale = 0.9 * imageHeight / _cfg.simulationHeight;
     for (const auto& pair : _simulation.getParticleInfo()) {
         const QVector2D& position = pair.first;
         double mass = pair.second;
-        size_t pixelX = 0.1 * imageWidth + xScale * (position.x() + _cfg.simulationWidth / 2);
-        size_t pixelY = 0.1 * imageHeight + yScale * (position.y() + _cfg.simulationHeight / 2);
-        drawCircle(image, pixelX, pixelY, static_cast<size_t>(pow(mass, 0.75)), color);
+        size_t pixelX = 0.05 * imageWidth + xScale * (position.x() + _cfg.simulationWidth / 2);
+        size_t pixelY = 0.05 * imageHeight + yScale * (position.y() + _cfg.simulationHeight / 2);
+        drawCircle(image, pixelX, pixelY, static_cast<size_t>(2 * log(mass)), color);
     }
 
     return image;

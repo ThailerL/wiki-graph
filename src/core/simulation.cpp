@@ -23,12 +23,11 @@ void Simulation::addForceBetween(size_t p1, size_t p2, const Force& force) {
 
 void Simulation::run(size_t iterations, double dt) {
     // distribute particles randomly
-    RNG random_x(-_maxX, _maxX);
-    RNG random_y(-_maxY, _maxY);
+    RNG random(-1, 1);
 
     for (Particle& p : _particles) {
-        p.position.setX(random_x());
-        p.position.setY(random_x());
+        p.position.setX(random() * _maxX / 1.3);
+        p.position.setY(random() * _maxY / 1.3);
         p.velocity = {0, 0};
         p.acceleration = {0, 0};
     }
