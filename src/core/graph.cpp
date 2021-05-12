@@ -118,15 +118,12 @@ namespace wikigraph
             for (size_t i = 0; i < nodes.size(); i++)
                 predecessors.push_back(-1);
 
-            std::cout << "neighbors of " << from << ": ";
             for (size_t v : nodes[from].neighbors)
             {
-                std::cout << v << " ";
                 distances[v] = nodes[v].indegree;
                 predecessors[v] = from;
                 minHeap.push(v);
             }
-            std::cout << "\n";
 
             while (!minHeap.empty())
             {
@@ -140,30 +137,16 @@ namespace wikigraph
                         minHeap.push(neighbor);
                         predecessors[neighbor] = current_node;
                     }
-                    else
+                    else if (distances[neighbor] >= new_dist)
                     {
-                        if (distances[neighbor] >= new_dist)
-                        {
-                            distances[neighbor] = new_dist;
-                            predecessors[neighbor] = current_node;
-                        }
+                        distances[neighbor] = new_dist;
+                        predecessors[neighbor] = current_node;
                     }
                 }
                 minHeap.pop();
                 if (current_node == to)
                     break;
             }
-            // TODO Remove
-            for (size_t i = 0; i < predecessors.size(); i++)
-            {
-                std::cout << " " << i;
-            }
-            std::cout << "\n";
-            for (size_t p : predecessors)
-            {
-                std::cout << " " << p;
-            }
-            std::cout << " <--- Predecessors\n";
 
             vector<size_t> path;
             size_t index = to;
