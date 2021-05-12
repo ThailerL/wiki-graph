@@ -169,9 +169,9 @@ public:
      * Gets all points within a taxicab distance r of p.
      * @param p the center point
      * @param r the radius around the point to query
-     * @return vector of found points
+     * @return vector with the data of the found points
      */
-    vector<Point<Dim, V>> rangeQuery(const Point<Dim, V>& p, double r);
+    vector<V> rangeQuery(const Point<Dim, V>& p, double r);
 
     /**
      * Destructor for KDTree.
@@ -190,30 +190,45 @@ private:
      * @return pointer to head of new tree
      */
     KDTreeNode* copyTree(KDTreeNode* subroot) const;
+
     /**
      * Recursively deletes a node and all children.
      */
     void clear(KDTreeNode* node);
+
     /**
      * Swaps index i and j of a vector of points.
      */
     void swap(vector<Point<Dim, V>>& points, int i, int j);
+
     /**
      * Lomuto partition scheme for a vector of points.
      * @return index of pivot in partitioned list
      */
     int partition(vector<Point<Dim, V>>& points, int left, int right, int pivotIndex, int d);
+
     /**
      * Gets median of list and partitions it along the median.
      * @return median point of list
      */
     Point<Dim, V> quickSelect(vector<Point<Dim, V>>& points, int left, int right, int k, int d);
+
     /**
      * Recursively builds a k-d tree from a list of points.
      * @param d splitting dimension
      * @return head of built k-d tree
      */
     KDTreeNode* buildTree(vector<Point<Dim, V>> points, int d);
+
+    /**
+     * Recursive helper function for rangeQuery
+     * @param p the center point
+     * @param r the radius around the point to query
+     * @param n current splitting dimension
+     * @param subroot current node
+     * @return vector with the data of the found points
+     */
+    vector<V> rangeQuery(const Point<Dim, V>& p, double r, int n, KDTree::KDTreeNode *subroot);
 };
 
 #include "kdtree.hpp"

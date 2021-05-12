@@ -80,7 +80,10 @@ private:
 };
 
 
-template <int Dim>
+template <int Dim, typename V>
 std::ostream& operator<<(std::ostream& out, const Point<Dim, V>& p);
+
+template <int Dim, typename V>
+double distance2(const Point<Dim, V>& p1, const Point<Dim, V>& p2);
 
 #include "point.hpp"

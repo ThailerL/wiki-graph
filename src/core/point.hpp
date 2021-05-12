@@ -3,6 +3,8 @@
  * Implementation of Point class.
  */
 
+#include <cmath>
+
 #include "point.h"
 
 /**
@@ -100,6 +102,15 @@ template <int Dim, typename V>
 std::ostream& operator<<(std::ostream& out, const Point<Dim, V>& p) {
     p.print(out);
     return out;
+}
+
+template<int Dim, typename V>
+double distance2(const Point<Dim, V>& p1, const Point<Dim, V>& p2) {
+    double d = 0;
+    for (int i = 0; i < Dim; i++) {
+        d += std::pow(p1[i] - p2[i], 2);
+    }
+    return d;
 }
 
 template <int Dim, typename V>

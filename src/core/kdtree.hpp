@@ -114,3 +114,31 @@ typename KDTree<Dim, V>::KDTreeNode* KDTree<Dim, V>::buildTree(vector<Point<Dim,
     subroot->right = buildTree(vector<Point<Dim, V>>(points.begin() + k + 1, points.end()), (d + 1) % Dim);
     return subroot;
 }
+
+template<int Dim, typename V>
+vector<V> KDTree<Dim, V>::rangeQuery(const Point<Dim, V>& p, double r) {
+    return rangeQuery(p, r, 0, root);
+}
+
+template<int Dim, typename V>
+vector<V> KDTree<Dim, V>::rangeQuery(const Point<Dim, V>& p, double r, int n, KDTree::KDTreeNode* subroot) {
+    if (subroot->point[n] < p[n] - r) {
+        if (subroot->right) return rangeQuery(p, r, (n + 1) % Dim, subroot->right);
+        else return {};
+    } else if (subroot->point[n] > p[n] + r) {
+        if (subroot->left) return rangeQuery(p, r, (n + 1) % Dim, subroot->left);
+        else return {};
+    } else {
+        vector<Point<Dim, V>> found;
+        if (distance2(subroot->point, p) < std::pow(r, 2)) found.push_back(subroot->point.data);
+        if (subroot->right) {
+            vector<Point<Dim, V>> children = rangeQuery(p, r, (n + 1) % Dim, subroot->right);
+            found.insert(found.end(), children.begin(), children.end());
+        }
+        if (subroot->left) {
+            vector<Point<Dim, V>> children = rangeQuery(p, r, (n + 1) % Dim, subroot->left);
+            found.insert(found.end(), children.begin(), children.end());
+        }
+        return found;
+    }
+}
