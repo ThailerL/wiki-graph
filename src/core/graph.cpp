@@ -60,6 +60,7 @@ void Graph::addEdge(size_t from, size_t to) {
 vector<size_t> Graph::shortestPath(size_t from, size_t to) {
     from = from - _lowerIndex;
     to = to - _lowerIndex;
+    // maps from a node to its predecessor to backtrack
     std::unordered_map<size_t, size_t> predecessors;
     std::queue<size_t> work;
 

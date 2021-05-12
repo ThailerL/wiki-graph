@@ -48,6 +48,7 @@ PNG Renderer::render(size_t imageWidth, size_t imageHeight) {
     double yScale = 0.9 * imageHeight / _cfg.simulationHeight;
     const auto& particles = _simulation.getParticleInfo();
 
+    // prepare graph to be drawn
     for (const auto& pair : _simulation.getParticleInfo()) {
         const QVector2D& position = pair.first;
         double mass = pair.second;
@@ -56,7 +57,7 @@ PNG Renderer::render(size_t imageWidth, size_t imageHeight) {
         _nodeDrawInfo.emplace_back(x, y, static_cast<size_t>(3 + 4 * log(mass)));
     }
 
-    // first draw lines
+    // first draw edges
     for (const auto& edge : _edges) {
         const auto& p1 = _nodeDrawInfo[edge.first];
         const auto& p2 = _nodeDrawInfo[edge.second];

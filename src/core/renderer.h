@@ -46,9 +46,14 @@ public:
      */
     PNG render(size_t imageWidth, size_t imageHeight);
 
+    /**
+     * Renders the graph with a path highlighted in a different color.
+     * @return a PNG object with the drawn graph.
+     */
     PNG renderWithPathHighlighted(size_t imageWidth, size_t imageHeight, vector<size_t> path);
 
 private:
+    // Stores information of a node needed for drawing. Units are pixels.
     struct NodeInfo {
         NodeInfo(size_t x, size_t y, size_t r) : x(x), y(y), radius(r) {}
         size_t x;
@@ -59,11 +64,19 @@ private:
     RendererConfig _cfg;
     Simulation _simulation;
     size_t _lowerIndex;
+    // set of undirected edges to draw later
     std::set<std::pair<size_t, size_t>> _edges;
+    // the information needed to draw all nodes
     vector<NodeInfo> _nodeDrawInfo;
 
+    /**
+     * Draws a straight 1-pixel thick line on the image from one point to another in the specified color.
+     */
     void drawLine(PNG& image, double x0, double y0, double x1, double y1, const HSLAPixel& color) const;
 
+    /**
+     * Draws a filled circle with center (x, y) on the image with a specified radius and color.
+     */
     void drawCircle(PNG& image, size_t x, size_t y, size_t radius, const HSLAPixel& color) const;
 };
 
