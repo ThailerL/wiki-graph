@@ -2,6 +2,7 @@
 
 #include "force.h"
 #include "particle.h"
+#include "kdtree.h"
 #include <functional>
 #include <map>
 #include <vector>
