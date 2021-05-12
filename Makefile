@@ -4,8 +4,8 @@ EXE = wiki-graph
 TEST = test
 
 # Add all object files needed for compiling:
-EXE_OBJ = apps/main.o
-OBJS = apps/main.o src/core/graph.o src/util/util.o src/core/particle.o src/core/force.o src/core/simulation.o src/core/renderer.o
+EXE_OBJ = apps/wiki-graph.o
+OBJS = apps/wiki-graph.o src/core/graph.o src/util/util.o src/core/particle.o src/core/force.o src/core/simulation.o src/core/renderer.o
 
 # Generated files
 CLEAN_RM = actual-*.png
