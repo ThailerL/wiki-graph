@@ -1,4 +1,5 @@
 #include "force.h"
+#include <math.h> 
 
 namespace wikigraph {
 namespace core {
@@ -11,7 +12,7 @@ Force coulombicForce(double k) {
 
 Force elasticForce(double k) {
     return [k](const Particle& p1, const Particle& p2) {
-      return towards(p1, p2) * k * glm::log(distance(p1, p2));
+      return towards(p1, p2) * k * log(distance(p1, p2));
     };
 }
 

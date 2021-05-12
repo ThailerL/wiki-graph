@@ -1,14 +1,11 @@
 #pragma once
 
-#define GLM_ENABLE_EXPERIMENTAL
 #include <vector>
 #include <string>
-#include <glm/glm.hpp>
-#include <glm/gtx/norm.hpp>
+#include <Qt/qvector2d.h>
 
 using std::vector;
 using std::string;
-using glm::dvec2;
 
 namespace wikigraph {
 namespace core {
@@ -18,18 +15,18 @@ namespace core {
  */
 class Particle {
 public:
-    dvec2 position;
-    dvec2 velocity;
-    dvec2 acceleration;
+    QVector2D position;
+    QVector2D velocity;
+    QVector2D acceleration;
     const double mass;
-    Particle(const dvec2& position, const dvec2& velocity, const dvec2& acceleration, double mass);
+    Particle(const QVector2D& position, const QVector2D& velocity, const QVector2D& acceleration, double mass);
     explicit Particle(double mass);
     /**
      * Adds a force to the particle for the current timestep (not persistent).
      *
      * @param forceVector vector representing the force
      */
-    void addForce(const dvec2& forceVector);
+    void addForce(const QVector2D& forceVector);
 
     /**
      * Updates the position and velocity of the particle, resets the acceleration.
@@ -60,7 +57,7 @@ double distance2(const Particle& p1, const Particle& p2);
 /**
  * Helper function to compute the unit vector pointing from p1 to p2.
  */
-dvec2 towards(const Particle& p1, const Particle& p2);
+QVector2D towards(const Particle& p1, const Particle& p2);
 
 }
 }

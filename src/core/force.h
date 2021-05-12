@@ -7,7 +7,6 @@
 
 using std::vector;
 using std::function;
-using glm::dvec2;
 
 namespace wikigraph {
 namespace core {
@@ -15,7 +14,7 @@ namespace core {
 /**
  * A Force is a function which takes in two particles and returns the force vector to be applied to the first one.
  */
-typedef function<dvec2(const Particle&, const Particle&)> Force;
+typedef function<QVector2D(const Particle&, const Particle&)> Force;
 
 /**
  * Builds a coloumbic force.

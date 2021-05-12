@@ -10,7 +10,6 @@ using std::vector;
 using std::map;
 using std::pair;
 using std::function;
-using glm::dvec2;
 
 namespace wikigraph {
 namespace core {
@@ -47,7 +46,7 @@ public:
     /**
      * Gets (position, mass) pairs for all particles in the simulation.
      */
-    vector<pair<dvec2, double>> getParticleInfo() const;
+    vector<pair<QVector2D, double>> getParticleInfo() const;
 
 private:
     vector<Particle> _particles;

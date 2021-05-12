@@ -5,12 +5,12 @@
 namespace wikigraph {
 namespace core {
 
-Particle::Particle(const dvec2& position, const dvec2& velocity, const dvec2& acceleration, double mass) : position(
+Particle::Particle(const QVector2D& position, const QVector2D& velocity, const QVector2D& acceleration, double mass) : position(
     position), velocity(velocity), acceleration(acceleration), mass(mass) {}
 
 Particle::Particle(double mass) : position(), velocity(), acceleration(), mass(mass) {}
 
-void Particle::addForce(const dvec2& forceVector) {
+void Particle::addForce(const QVector2D& forceVector) {
     acceleration += forceVector / mass;
 }
 
@@ -21,20 +21,20 @@ void Particle::update(double dt) {
 }
 
 void Particle::clamp(double maxX, double maxY) {
-    boost::algorithm::clamp(position.x, -maxX, maxX);
-    boost::algorithm::clamp(position.y, -maxY, maxY);
+    position.setX(boost::algorithm::clamp(position.x(), -maxX, maxX));
+    position.setY(boost::algorithm::clamp(position.y(), -maxY, maxY));
 }
 
 double distance(const Particle& p1, const Particle& p2) {
-    return glm::distance(p1.position, p2.position);
+    return (p1.position - p2.position).length();
 }
 
 double distance2(const Particle& p1, const Particle& p2) {
-    return glm::distance2(p1.position, p2.position);
+    return (p1.position - p2.position).lengthSquared();
 }
 
-dvec2 towards(const Particle& p1, const Particle& p2) {
-    return glm::normalize(p2.position - p1.position);
+QVector2D towards(const Particle& p1, const Particle& p2) {
+    return (p2.position - p1.position).normalized();
 }
 
 }

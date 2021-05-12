@@ -23,8 +23,8 @@ void Simulation::run(size_t iterations, double dt) {
     RNG random_y(-_maxY, _maxY);
 
     for (Particle& p : _particles) {
-        p.position.x = random_x();
-        p.position.y = random_y();
+        p.position.setX(random_x());
+        p.position.setY(random_y());
         p.velocity = {0, 0};
         p.acceleration = {0, 0};
     }
@@ -41,7 +41,7 @@ void Simulation::update(double dt) {
         const Force& force = kvp.second;
         Particle& p1 = _particles[kvp.first.first];
         Particle& p2 = _particles[kvp.first.second];
-        dvec2 forceVec = force(p1, p2);
+        QVector2D forceVec = force(p1, p2);
         p1.addForce(forceVec);
         p2.addForce(-forceVec);
     }
@@ -51,8 +51,8 @@ void Simulation::update(double dt) {
     }
 }
 
-vector<pair<dvec2, double>> Simulation::getParticleInfo() const {
-    vector<pair<dvec2, double>> particleInfo(_particles.size());
+vector<pair<QVector2D, double>> Simulation::getParticleInfo() const {
+    vector<pair<QVector2D, double>> particleInfo(_particles.size());
     for (const Particle& particle : _particles) {
         particleInfo.emplace_back(particle.position, particle.mass);
     }
