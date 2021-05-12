@@ -39,13 +39,13 @@ PNG Renderer::render(size_t imageWidth, size_t imageHeight) {
     PNG image(imageWidth, imageHeight);
     HSLAPixel color(0, 1, .5, 1);
 
-    double xScale = imageWidth / _cfg.simulationWidth;
-    double yScale = imageHeight / _cfg.simulationHeight;
+    double xScale = 0.8 * imageWidth / _cfg.simulationWidth;
+    double yScale = 0.8 * imageHeight / _cfg.simulationHeight;
     for (const auto& pair : _simulation.getParticleInfo()) {
         const QVector2D& position = pair.first;
         double mass = pair.second;
-        size_t pixelX = xScale * (position.x() + _cfg.simulationWidth / 2);
-        size_t pixelY = yScale * (position.y() + _cfg.simulationHeight / 2);
+        size_t pixelX = 0.1 * imageWidth + xScale * (position.x() + _cfg.simulationWidth / 2);
+        size_t pixelY = 0.1 * imageHeight + yScale * (position.y() + _cfg.simulationHeight / 2);
         drawCircle(image, pixelX, pixelY, static_cast<size_t>(mass), color);
     }
 
@@ -53,8 +53,9 @@ PNG Renderer::render(size_t imageWidth, size_t imageHeight) {
 }
 
 void Renderer::drawCircle(PNG& image, size_t x, size_t y, size_t radius, const HSLAPixel& color) {
-    for (size_t currentX = x - radius; currentX < x + radius; ++currentX) {
-        image.getPixel(currentX, y) = color;
+    for (size_t currentX = x - radius; currentX <= x + radius; ++currentX) {
+        if (currentX < image.width() && y < image.height())
+            image.getPixel(currentX, y) = color;
     }
 
     // start at middle of circle and reduce deltaX while going down each row
@@ -67,8 +68,10 @@ void Renderer::drawCircle(PNG& image, size_t x, size_t y, size_t radius, const H
             }
 
             for (size_t currentX = x - deltaX; currentX <= x + deltaX; ++currentX) {
-                image.getPixel(currentX, y + deltaY) = color;
-                image.getPixel(currentX, y - deltaY) = color;
+                if (currentX < image.width() && y + deltaY < image.height())
+                    image.getPixel(currentX, y + deltaY) = color;
+                if (currentX < image.width() && y - deltaY < image.height())
+                    image.getPixel(currentX, y - deltaY) = color;
             }
 
             maxDeltaX = deltaX;
