@@ -16,7 +16,7 @@ OBJS_DIR = .objs
 
 # Add standard CS 225 object files
 OBJS += src/cs225/HSLAPixel.o src/cs225/PNG.o src/cs225/lodepng/lodepng.o
-
+LIBS = /lib64/libQtGui.so
 # -MMD and -MP asks clang++ to generate a .d file listing the headers used in the source code for use in the Make process.
 #   -MMD: "Write a depfile containing user headers"
 #   -MP : "Create phony target for each dependency (other than main file)"
@@ -38,7 +38,7 @@ all: $(EXE)
 # Rule for linking the final executable:
 # - $(EXE) depends on all object files in $(OBJS)
 # - `patsubst` function adds the directory name $(OBJS_DIR) before every object file
-$(EXE): output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS))
+$(EXE): output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS)) $(LIBS)
 	$(LD) $(filter-out $<, $^) $(LDFLAGS) -o $@
 # -L/usr/local/boost_1_61_0/boost
 # Ensure .objs/ exists:
@@ -75,7 +75,7 @@ CPP_TEST = $(wildcard tests/*.cpp)
 CPP_TEST += src/cs225/catch/catchmain.cpp
 OBJS_TEST += $(CPP_TEST:.cpp=.o)
 
-$(TEST): output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_TEST))
+$(TEST): output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_TEST)) $(LIBS)
 	$(LD) $(filter-out $<, $^) $(LDFLAGS) -o $@
 
 # Additional dependencies for object files are included in the clang++
