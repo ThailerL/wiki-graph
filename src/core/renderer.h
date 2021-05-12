@@ -34,6 +34,7 @@ public:
         double simulationHeight;
         double nodeRepulsion;
         double neighborAttraction;
+        double maxRepulsionRadius;
         size_t iterations;
         double dt;
     };

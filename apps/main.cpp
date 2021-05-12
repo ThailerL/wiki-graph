@@ -13,6 +13,7 @@ int main(int argc, char* argv[]) {
     cfg.simulationHeight = 1000;
     cfg.nodeRepulsion = 1;
     cfg.neighborAttraction = 2;
+    cfg.maxRepulsionRadius = 20;
     cfg.iterations = 1000;
     cfg.dt = 0.01;
 

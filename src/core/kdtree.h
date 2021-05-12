@@ -21,6 +21,9 @@ using std::ostream;
 using std::cout;
 using std::endl;
 
+namespace wikigraph {
+namespace core {
+
 /**
  * KDTree class: implemented using Points in Dim dimensional space (given
  * by the template parameter).
@@ -166,12 +169,12 @@ public:
     KDTree const& operator=(const KDTree<Dim, V>& rhs);
 
     /**
-     * Gets all points within a taxicab distance r of p.
+     * Gets all points within a taxicab distance r2 of p.
      * @param p the center point
-     * @param r the radius around the point to query
+     * @param r2 the squared radius around the point to query
      * @return vector with the data of the found points
      */
-    vector<V> rangeQuery(const Point<Dim, V>& p, double r);
+    vector<V> rangeQuery(const Point<Dim, V>& p, double r2);
 
     /**
      * Destructor for KDTree.
@@ -223,12 +226,15 @@ private:
     /**
      * Recursive helper function for rangeQuery
      * @param p the center point
-     * @param r the radius around the point to query
+     * @param r2 the squared radius around the point to query
      * @param n current splitting dimension
      * @param subroot current node
      * @return vector with the data of the found points
      */
-    vector<V> rangeQuery(const Point<Dim, V>& p, double r, int n, KDTree::KDTreeNode *subroot);
+    vector<V> rangeQuery(const Point<Dim, V>& p, double r2, int n, KDTree::KDTreeNode* subroot);
 };
+
+}
+}
 
 #include "kdtree.hpp"

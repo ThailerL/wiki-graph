@@ -7,8 +7,8 @@ using wikigraph::util::RNG;
 namespace wikigraph {
 namespace core {
 
-Simulation::Simulation(const vector<double>& masses, double width, double height)
-    : _maxX(width / 2), _maxY(height / 2) {
+Simulation::Simulation(const vector<double>& masses, double width, double height, double forceRange)
+    : _maxX(width / 2), _maxY(height / 2), _forceRange(forceRange) {
     for (double mass : masses)
         _particles.emplace_back(mass);
 }
@@ -19,6 +19,14 @@ void Simulation::addForceBetween(size_t p1, size_t p2, const Force& force) {
         _forces[particles] += force;
     else
         _forces[particles] = force;
+}
+
+void Simulation::addRangedForceBetween(size_t p1, size_t p2, const Force& force) {
+    pair<size_t, size_t> particles = {p1, p2};
+    if (_rangedForces.count(particles))
+        _rangedForces[particles] += force;
+    else
+        _rangedForces[particles] = force;
 }
 
 void Simulation::run(size_t iterations, double dt) {
@@ -41,16 +49,29 @@ void Simulation::run(size_t iterations, double dt) {
     }
 }
 
+void applyForce(Particle& p1, Particle& p2, const Force& force) {
+    QVector2D forceVec = force(p1, p2);
+    p1.addForce(forceVec);
+    p2.addForce(-forceVec);
+}
+
 void Simulation::update(double dt) {
-    // TODO: use a k-d tree to only compute forces between close particles
+    // non-ranged forces
     for (auto const& kvp : _forces) {
-        const Force& force = kvp.second;
-        Particle& p1 = _particles[kvp.first.first];
-        Particle& p2 = _particles[kvp.first.second];
-        QVector2D forceVec = force(p1, p2);
-        p1.addForce(forceVec);
-        p2.addForce(-forceVec);
+        applyForce(_particles[kvp.first.first], _particles[kvp.first.second], kvp.second);
     }
+    // KD tree culling for ranged forces
+    KDTree<2, size_t> kdTree = getKDTree();
+    for (size_t i = 0; i < _particles.size(); i++) {
+        Point<2, size_t> p(_particles[i].position.x(), _particles[i].position.y(), i);
+        for (size_t j : kdTree.rangeQuery(p, _forceRange)) {
+            pair<size_t, size_t> particlePair = {i, j};
+            if (_rangedForces.count(particlePair)) {
+                applyForce(_particles[i], _particles[j], _rangedForces[particlePair]);
+            }
+        }
+    }
+    // update particles
     for (Particle& p : _particles) {
         p.update(dt);
         p.clamp(_maxX, _maxY);
@@ -63,6 +84,14 @@ vector<pair<QVector2D, double>> Simulation::getParticleInfo() const {
         particleInfo.emplace_back(particle.position, particle.mass);
     }
     return particleInfo;
+}
+
+KDTree<2, size_t> Simulation::getKDTree() {
+    vector<Point<2, size_t>> points(_particles.size());
+    for (size_t i = 0; i < _particles.size(); i++) {
+        points.emplace_back(_particles[i].position.x(), _particles[i].position.y(), i);
+    }
+    return KDTree<2, size_t>(points);
 }
 
 } // namespace core
