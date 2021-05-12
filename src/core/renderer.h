@@ -6,8 +6,10 @@
 #include "simulation.h"
 #include "force.h"
 #include "../cs225/PNG.h"
+#include "../cs225/HSLAPixel.h"
 
 using cs225::PNG;
+using cs225::HSLAPixel;
 
 namespace wikigraph {
 namespace core {
@@ -47,6 +49,8 @@ public:
 private:
     RendererConfig _cfg;
     Simulation _simulation;
+
+    void drawCircle(PNG& image, size_t x, size_t y, size_t radius, const HSLAPixel& color);
 };
 
 }
