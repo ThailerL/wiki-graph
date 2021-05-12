@@ -147,5 +147,9 @@ std::vector<size_t> Graph::getDjikstraPath(size_t from, size_t to) {
     return path;
 }
 
+size_t Graph::getLowerIndex() const {
+    return _lowerIndex;
+}
+
 } // namespace core
 } // namespace wikigraph

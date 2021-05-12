@@ -38,7 +38,10 @@ public:
      * @return a vector of node indices of nodes that make up the shortest path in order (empty if no path)
     */
     vector<size_t> shortestPath(size_t from, size_t to);
+
     vector<size_t> getDjikstraPath(size_t from, size_t to);
+
+    size_t getLowerIndex() const;
 
     vector<Node> nodes;
 

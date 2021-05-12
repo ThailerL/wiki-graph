@@ -46,14 +46,25 @@ public:
      */
     PNG render(size_t imageWidth, size_t imageHeight);
 
+    PNG renderWithPathHighlighted(size_t imageWidth, size_t imageHeight, vector<size_t> path);
+
 private:
+    struct NodeInfo {
+        NodeInfo(size_t x, size_t y, size_t r) : x(x), y(y), radius(r) {}
+        size_t x;
+        size_t y;
+        size_t radius;
+    };
+
     RendererConfig _cfg;
     Simulation _simulation;
+    size_t _lowerIndex;
     std::set<std::pair<size_t, size_t>> _edges;
+    vector<NodeInfo> _nodeDrawInfo;
 
-    void drawLine(PNG& image, double x0, double y0, double x1, double y1, const HSLAPixel& color);
+    void drawLine(PNG& image, double x0, double y0, double x1, double y1, const HSLAPixel& color) const;
 
-    void drawCircle(PNG& image, size_t x, size_t y, size_t radius, const HSLAPixel& color);
+    void drawCircle(PNG& image, size_t x, size_t y, size_t radius, const HSLAPixel& color) const;
 };
 
 } // namespace core
