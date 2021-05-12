@@ -30,6 +30,10 @@ Renderer::Renderer(const Graph& graph, const RendererConfig& cfg)
         // once per edge, so bidirectional edges will lead to twice the attraction
         for (size_t neighbor : graph.nodes[i].neighbors) {
             _simulation.addForceBetween(i, neighbor, elasticForce(cfg.neighborAttraction));
+            if (i < neighbor)
+                _edges.insert({i, neighbor});
+            else
+                _edges.insert({neighbor, i});
         }
     }
 }
@@ -37,19 +41,46 @@ Renderer::Renderer(const Graph& graph, const RendererConfig& cfg)
 PNG Renderer::render(size_t imageWidth, size_t imageHeight) {
     _simulation.run(_cfg.iterations, _cfg.dt);
     PNG image(imageWidth, imageHeight);
-    HSLAPixel color(0, 1, .5, 1);
+    HSLAPixel lineColor(0, 0, 0, 1);
+    HSLAPixel nodeColor(0, 1, .5, 1);
 
     double xScale = 0.9 * imageWidth / _cfg.simulationWidth;
     double yScale = 0.9 * imageHeight / _cfg.simulationHeight;
+    const auto& particles = _simulation.getParticleInfo();
+
+    // first draw lines
+    for (const auto& edge : _edges) {
+        auto p1pos = particles[edge.first].first;
+        auto p2pos = particles[edge.second].first;
+        double p1x = 0.05 * imageWidth + xScale * (p1pos.x() + _cfg.simulationWidth / 2);
+        double p1y = 0.05 * imageHeight + yScale * (p1pos.y() + _cfg.simulationHeight / 2);
+        double p2x = 0.05 * imageWidth + xScale * (p2pos.x() + _cfg.simulationWidth / 2);
+        double p2y = 0.05 * imageHeight + yScale * (p2pos.y() + _cfg.simulationHeight / 2);
+        drawLine(image, p1x, p1y, p2x, p2y, lineColor);
+    }
+
     for (const auto& pair : _simulation.getParticleInfo()) {
         const QVector2D& position = pair.first;
         double mass = pair.second;
         size_t pixelX = 0.05 * imageWidth + xScale * (position.x() + _cfg.simulationWidth / 2);
         size_t pixelY = 0.05 * imageHeight + yScale * (position.y() + _cfg.simulationHeight / 2);
-        drawCircle(image, pixelX, pixelY, static_cast<size_t>(2 * log(mass)), color);
+        drawCircle(image, pixelX, pixelY, static_cast<size_t>(3 + 4 * log(mass)), nodeColor);
     }
 
     return image;
+}
+
+void Renderer::drawLine(PNG& image, double x0, double y0, double x1, double y1, const HSLAPixel& color) {
+    double x = x1 - x0;
+    double y = y1 - y0;
+    const double max = std::max(abs(x), abs(y));
+    x /= max;
+    y /= max;
+    for (double n = 0; n < max; ++n) {
+        image.getPixel(x0, y0) = color;
+        x0 += x;
+        y0 += y;
+    }
 }
 
 void Renderer::drawCircle(PNG& image, size_t x, size_t y, size_t radius, const HSLAPixel& color) {

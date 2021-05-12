@@ -5,6 +5,7 @@
 #include "force.h"
 #include "graph.h"
 #include "simulation.h"
+#include <set>
 #include <vector>
 
 using cs225::HSLAPixel;
@@ -48,6 +49,9 @@ public:
 private:
     RendererConfig _cfg;
     Simulation _simulation;
+    std::set<std::pair<size_t, size_t>> _edges;
+
+    void drawLine(PNG& image, double x0, double y0, double x1, double y1, const HSLAPixel& color);
 
     void drawCircle(PNG& image, size_t x, size_t y, size_t radius, const HSLAPixel& color);
 };
