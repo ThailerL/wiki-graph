@@ -1,4 +1,5 @@
 #include "renderer.h"
+#include <math.h>
 
 namespace wikigraph {
 namespace core {
@@ -9,9 +10,9 @@ namespace core {
  * @return ordered vector of doubles
  */
 vector<double> getMassVector(const Graph& graph) {
-    vector<double> masses(graph.nodes.size());
+    vector<double> masses;
     for (const Graph::Node& node : graph.nodes) {
-        masses.push_back(node.indegree);
+        masses.push_back(node.indegree + 1);
     }
     return masses;
 }
@@ -24,12 +25,11 @@ Renderer::Renderer(const Graph& graph, const RendererConfig& cfg)
             // k must be negative to get repulsion not attraction
             _simulation.addForceBetween(i, j, coulombicForce(-cfg.nodeRepulsion));
         }
-    }
-    // add attractive forces between adjacent nodes
-    // once per edge, so bidirectional edges will lead to twice the attraction
-    for (const Graph::Node& node : graph.nodes) {
-        for (size_t neighbor : node.neighbors) {
-            _simulation.addForceBetween(node.index, neighbor, elasticForce(cfg.neighborAttraction));
+
+        // add attractive forces between adjacent nodes
+        // once per edge, so bidirectional edges will lead to twice the attraction
+        for (size_t neighbor : graph.nodes[i].neighbors) {
+            _simulation.addForceBetween(i, neighbor, elasticForce(cfg.neighborAttraction));
         }
     }
 }
@@ -46,7 +46,7 @@ PNG Renderer::render(size_t imageWidth, size_t imageHeight) {
         double mass = pair.second;
         size_t pixelX = 0.1 * imageWidth + xScale * (position.x() + _cfg.simulationWidth / 2);
         size_t pixelY = 0.1 * imageHeight + yScale * (position.y() + _cfg.simulationHeight / 2);
-        drawCircle(image, pixelX, pixelY, static_cast<size_t>(mass), color);
+        drawCircle(image, pixelX, pixelY, static_cast<size_t>(pow(mass, 0.75)), color);
     }
 
     return image;

@@ -1,5 +1,6 @@
 #include "simulation.h"
 #include "../util/util.h"
+#include <iostream>
 
 using wikigraph::util::RNG;
 
@@ -27,7 +28,7 @@ void Simulation::run(size_t iterations, double dt) {
 
     for (Particle& p : _particles) {
         p.position.setX(random_x());
-        p.position.setY(random_y());
+        p.position.setY(random_x());
         p.velocity = {0, 0};
         p.acceleration = {0, 0};
     }
@@ -35,6 +36,9 @@ void Simulation::run(size_t iterations, double dt) {
     // run the simulation
     for (size_t n = 0; n < iterations; n++) {
         update(dt);
+        if (n % 100 == 0) {
+            std::cout << "Iteration " << n << '\n';
+        }
     }
 }
 
@@ -55,7 +59,7 @@ void Simulation::update(double dt) {
 }
 
 vector<pair<QVector2D, double>> Simulation::getParticleInfo() const {
-    vector<pair<QVector2D, double>> particleInfo(_particles.size());
+    vector<pair<QVector2D, double>> particleInfo;
     for (const Particle& particle : _particles) {
         particleInfo.emplace_back(particle.position, particle.mass);
     }
