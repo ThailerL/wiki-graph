@@ -25,7 +25,7 @@ Renderer::Renderer(const Graph& graph, const RendererConfig& cfg)
     for (size_t i = 0; i < graph.nodes.size(); i++) {
         for (size_t j = i + 1; j < graph.nodes.size(); j++) {
             // k must be negative to get repulsion not attraction
-            _simulation.addForceBetween(i, j, coulombicForce(-cfg.nodeRepulsion));
+            _simulation.addRangedForceBetween(i, j, coulombicForce(-cfg.nodeRepulsion));
         }
 
         // add attractive forces between adjacent nodes

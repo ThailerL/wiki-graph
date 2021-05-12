@@ -132,14 +132,14 @@ vector<V> KDTree<Dim, V>::rangeQuery(const Point<Dim, V>& p, double r2, int n, K
         if (subroot->left) return rangeQuery(p, r2, (n + 1) % Dim, subroot->left);
         else return {};
     } else {
-        vector<Point<Dim, V>> found;
+        vector<V> found;
         if (distance2(subroot->point, p) < r2) found.push_back(subroot->point.data);
         if (subroot->right) {
-            vector<Point<Dim, V>> children = rangeQuery(p, r2, (n + 1) % Dim, subroot->right);
+            vector<V> children = rangeQuery(p, r2, (n + 1) % Dim, subroot->right);
             found.insert(found.end(), children.begin(), children.end());
         }
         if (subroot->left) {
-            vector<Point<Dim, V>> children = rangeQuery(p, r2, (n + 1) % Dim, subroot->left);
+            vector<V> children = rangeQuery(p, r2, (n + 1) % Dim, subroot->left);
             found.insert(found.end(), children.begin(), children.end());
         }
         return found;
