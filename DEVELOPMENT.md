@@ -16,4 +16,4 @@ In this time frame, we began the implementation of two major components of this 
 
 ## Weeks 3 - 4 
 
-T.B.D
+During the final stretch, we were able to implement our goals and touch up on finer details. We implemented the Djikstra's shortest path algorithm to find meaningful relationships between articles. In addition, we finished the force based visualization with support for highlighting certain paths. Finally, we added executables such as `wiki-graph`, `wiki-map` and `path` for a better user end experience.
