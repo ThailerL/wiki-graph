@@ -94,7 +94,7 @@ vector<size_t> Graph::shortestPath(size_t from, size_t to) {
     return vector<size_t>();
 }
 
-std::vector<size_t> Graph::getDjikstraPath(size_t from, size_t to) {
+std::vector<size_t> Graph::getDijkstraPath(size_t from, size_t to) {
     // Create min heap using stl priority queue
     priority_queue<size_t, vector<size_t>, std::greater<size_t>> minHeap;
     // Initialize all distances to infinity beforehand
