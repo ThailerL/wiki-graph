@@ -2,7 +2,7 @@
 
 ## tslietz2-sohamk2-ttz2
 
-Description TODO
+Wiki-graph is a collection of executables for visualizing the relationships between Wikipedia nodes using force-based graph drawing.
 
 ## Executables
 
