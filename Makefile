@@ -21,7 +21,7 @@ prep-data: output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_TRIM)) $(LIBS)
 	$(LD) $(filter-out $<, $^) $(LDFLAGS) -o $@
 
 OBJS_DP += $(filter-out $(EXE_OBJ), $(OBJS))
-OBJS_DP += apps/djikstra-path.o
+OBJS_DP += apps/path.o
 
-djikstra-path: output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_DP)) $(LIBS)
+path: output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_DP)) $(LIBS)
 	$(LD) $(filter-out $<, $^) $(LDFLAGS) -o $@
