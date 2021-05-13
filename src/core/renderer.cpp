@@ -18,12 +18,14 @@ vector<double> getMassVector(const Graph& graph) {
 }
 
 Renderer::Renderer(const Graph& graph, const RendererConfig& cfg)
-    : _cfg(cfg), _simulation(getMassVector(graph), cfg.simulationWidth, cfg.simulationHeight), _lowerIndex(graph.getLowerIndex()) {
+    : _cfg(cfg),
+      _simulation(getMassVector(graph), cfg.simulationWidth, cfg.simulationHeight, cfg.maxRepulsionRadius),
+      _lowerIndex(graph.getLowerIndex()) {
     // add repulsive forces between nodes
     for (size_t i = 0; i < graph.nodes.size(); i++) {
         for (size_t j = i + 1; j < graph.nodes.size(); j++) {
             // k must be negative to get repulsion not attraction
-            _simulation.addForceBetween(i, j, coulombicForce(-cfg.nodeRepulsion));
+            _simulation.addRangedForceBetween(i, j, coulombicForce(-cfg.nodeRepulsion));
         }
 
         // add attractive forces between adjacent nodes

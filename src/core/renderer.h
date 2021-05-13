@@ -26,6 +26,7 @@ public:
      * @param simulationHeight height of the simulation
      * @param nodeRepulsion coloumbic multiplier for how strong nodes repel each other (should be positive)
      * @param neighborAttraction elastic multiplier for how strong adjacent nodes attract each other
+     * @param maxRepulsionRadius the maximum repulsion radius
      * @param iterations number of iterations to run the simulation for
      * @param dt timestep per iteration
      */
@@ -34,6 +35,7 @@ public:
         double simulationHeight;
         double nodeRepulsion;
         double neighborAttraction;
+        double maxRepulsionRadius;
         size_t iterations;
         double dt;
     };
