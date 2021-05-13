@@ -80,14 +80,13 @@ The following executables can be built and run:
 
 2. You can find an unweighted shortest path from [SymPy](https://en.wikipedia.org/wiki/SymPy) to [Graph theory](https://en.wikipedia.org/wiki/Graph_theory).
     ```
-    make path
     ./path data/trimmed.txt 507232 506726 bfs
     ```
     This finds a path of length 3 going from [SymPy](https://en.wikipedia.org/wiki/SymPy), through [Polynomial long division](https://en.wikipedia.org/wiki/Polynomial_long_division) and [Algorithm](https://en.wikipedia.org/wiki/Algorithm), arriving at [Graph theory](https://en.wikipedia.org/wiki/Graph_theory).
 
 3. You can also visualize this path in the graph.
     ```
-    ./wiki-graph data/math.txt graph.png 507232 506726
+    ./wiki-graph data/trimmed.txt graph.png 507232 506726
     ```
     This outputs an image that looks like this: ![math path](images/mathpath.png)
 

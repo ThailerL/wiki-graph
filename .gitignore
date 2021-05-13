@@ -12,4 +12,5 @@ data/
 # executables
 wiki-graph
 test
+path
 prep-data

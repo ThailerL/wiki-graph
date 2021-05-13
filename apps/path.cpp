@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
     // Number of Expected arguments
     int NUM_ARGS = 3;
     if (argc < NUM_ARGS + 1) {
-        err(string("Incorrect syntax, Use ./path input_path from_node to_node [type]"));
+        err(string("Incorrect syntax, Use ./path graph_file from_node to_node [type]"));
         return 1;
     }
 
