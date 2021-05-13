@@ -20,8 +20,16 @@ OBJS_TRIM += apps/prep-data.o
 prep-data: output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_TRIM)) $(LIBS)
 	$(LD) $(filter-out $<, $^) $(LDFLAGS) -o $@
 
+# Path target
 OBJS_DP += $(filter-out $(EXE_OBJ), $(OBJS))
 OBJS_DP += apps/path.o
 
 path: output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_DP)) $(LIBS)
+	$(LD) $(filter-out $<, $^) $(LDFLAGS) -o $@
+
+# Node id Map target
+OBJS_MAP += $(filter-out $(EXE_OBJ), $(OBJS))
+OBJS_MAP += apps/wiki-map.o
+
+wiki-map: output_msg $(patsubst %.o, $(OBJS_DIR)/%.o, $(OBJS_MAP)) $(LIBS)
 	$(LD) $(filter-out $<, $^) $(LDFLAGS) -o $@
