@@ -107,15 +107,14 @@ std::vector<size_t> Graph::getDjikstraPath(size_t from, size_t to) {
     for (size_t i = 0; i < nodes.size(); i++)
         predecessors.push_back(-1);
 
-    for (size_t v : nodes[from].neighbors) {
-        distances[v] = nodes[v].indegree;
-        predecessors[v] = from;
-        minHeap.push(v);
-    }
+    minHeap.push(from);
 
     while (!minHeap.empty()) {
         size_t current_node = minHeap.top();
-        for (size_t neighbor : nodes[current_node].neighbors) {
+        minHeap.pop();
+        if (current_node == to)
+            break;
+        for (const size_t neighbor : nodes[current_node].neighbors) {
             size_t new_dist =
                 distances[current_node] + nodes[neighbor].indegree;
             if (distances[neighbor] == INT16_MAX) {
@@ -125,11 +124,9 @@ std::vector<size_t> Graph::getDjikstraPath(size_t from, size_t to) {
             } else if (distances[neighbor] >= new_dist) {
                 distances[neighbor] = new_dist;
                 predecessors[neighbor] = current_node;
+                minHeap.push(neighbor);
             }
         }
-        minHeap.pop();
-        if (current_node == to)
-            break;
     }
 
     vector<size_t> path;
