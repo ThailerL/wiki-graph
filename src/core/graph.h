@@ -39,7 +39,7 @@ public:
     */
     vector<size_t> shortestPath(size_t from, size_t to);
 
-    vector<size_t> getDjikstraPath(size_t from, size_t to);
+    vector<size_t> getDijkstraPath(size_t from, size_t to);
 
     size_t getLowerIndex() const;
 

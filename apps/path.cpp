@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
     if (argc >= 5 && (std::string(argv[4]) == "b" || std::string(argv[4]) == "bfs")) {
         path = graph.shortestPath(from, to);
     } else {
-        path = graph.getDjikstraPath(from, to);
+        path = graph.getDijkstraPath(from, to);
     }
 
     if (path.empty()) {
