@@ -1,8 +1,8 @@
 # Wiki-graph
 
-## tslietz2-sohamk2-ttz2
-
 Wiki-graph is a collection of executables for visualizing the relationships between Wikipedia nodes using force-based graph drawing.
+
+<img src="images/10k.png" width="400" height="400">
 
 ## Executables
 
